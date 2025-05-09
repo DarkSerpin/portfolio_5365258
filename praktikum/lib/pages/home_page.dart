@@ -7,7 +7,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Portfolio'), // Titel der AppBar
+        title: const Text('Willkommen im Portfolio von Kevin Montag'), // Titel der AppBar
+        backgroundColor: Colors.blue, // Hintergrundfarbe der AppBar
+        elevation: 4, // Schatten der AppBar
       ),
       body: Center(
         child: Text(

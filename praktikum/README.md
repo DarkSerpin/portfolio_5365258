@@ -5,4 +5,4 @@
 
 ## Git-Branching
 - Feature-Branches (`feature/*`) für neue Funktionen  
-- Merge in `main` nach Code-Review  
+- Merge in `main` nach Code-Review 
