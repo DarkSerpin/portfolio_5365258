@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart'; // Importiere die HomePage
+import 'pages/home_page.dart';
+import 'pages/user_data.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,7 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Portfolio App',
-      home: HomePage(), // Lade die HomePage
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: HomePage(userData: UserData()), // Zentrale Dateninstanz
     );
   }
 }
