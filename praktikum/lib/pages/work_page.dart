@@ -1,70 +1,35 @@
 import 'package:flutter/material.dart';
-import 'slider_page.dart';
-import 'profile_form_page.dart';
-import 'settings_page.dart';
-import 'summary_page.dart';
-import 'user_data.dart';
 
 class WorkPage extends StatelessWidget {
-  final UserData userData;
-  const WorkPage({super.key, required this.userData});
+  const WorkPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(20),
-      children: [
-        const Text(
-          'Meine Arbeiten',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 20),
-        _buildProjectCard(
-          context,
-          'Slider Demo',
-          'Interaktives UI-Element',
-          () => Navigator.push(
+    return Scaffold(
+      appBar: AppBar(title: const Text('Meine Arbeiten')),
+      body: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          _buildProjectCard(
             context,
-            MaterialPageRoute(
-              builder:
-                  (context) => SliderPage(userData: userData), // Hinzugefügt: )
-            ),
+            'E-Commerce App',
+            'Vollständige E-Commerce-Lösung mit Flutter und Firebase',
+            Icons.shopping_cart,
           ),
-        ),
-        _buildProjectCard(
-          context,
-          'Profil Editor',
-          'Persönliche Informationen bearbeiten',
-          () => Navigator.push(
+          _buildProjectCard(
             context,
-            MaterialPageRoute(
-              builder: (context) => ProfileFormPage(userData: userData),
-            ),
+            'Wetter Dashboard',
+            'Echtzeit-Wetterdaten mit Visualisierungen',
+            Icons.cloud,
           ),
-        ),
-        _buildProjectCard(
-          context,
-          'Einstellungen',
-          'App-Einstellungen anpassen',
-          () => Navigator.push(
+          _buildProjectCard(
             context,
-            MaterialPageRoute(
-              builder: (context) => SettingsPage(userData: userData),
-            ),
+            'Fitness Tracker',
+            'Trainingsplanung und Fortschrittsverfolgung',
+            Icons.fitness_center,
           ),
-        ),
-        _buildProjectCard(
-          context,
-          'Zusammenfassung',
-          'Alle Daten im Überblick',
-          () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SummaryPage(userData: userData),
-            ),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -72,15 +37,29 @@ class WorkPage extends StatelessWidget {
     BuildContext context,
     String title,
     String description,
-    VoidCallback onTap,
+    IconData icon,
   ) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 15),
-      child: ListTile(
-        title: Text(title),
-        subtitle: Text(description),
-        trailing: const Icon(Icons.arrow_forward),
-        onTap: onTap,
+      margin: const EdgeInsets.only(bottom: 20),
+      elevation: 4,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Icon(icon, size: 40, color: Theme.of(context).primaryColor),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: Theme.of(context).textTheme.titleLarge),
+                  const SizedBox(height: 8),
+                  Text(description),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

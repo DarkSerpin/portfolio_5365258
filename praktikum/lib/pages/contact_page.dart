@@ -15,64 +15,123 @@ class _ContactPageState extends State<ContactPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Form(
-        key: _formKey,
-        child: ListView(
-          children: [
-            const Text(
-              'Kontakt',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 30),
-            TextFormField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Name',
-                border: OutlineInputBorder(),
+    return Scaffold(
+      appBar: AppBar(title: const Text('Kontakt')),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Kontaktformular',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              validator: (value) => value!.isEmpty ? 'Pflichtfeld' : null,
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'E-Mail',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Bitte geben Sie Ihren Namen ein';
+                  }
+                  return null;
+                },
               ),
-              validator:
-                  (value) => !value!.contains('@') ? 'Ungültige E-Mail' : null,
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              controller: _messageController,
-              decoration: const InputDecoration(
-                labelText: 'Nachricht',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 15),
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'E-Mail',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Bitte geben Sie Ihre E-Mail ein';
+                  }
+                  if (!value.contains('@')) {
+                    return 'Bitte geben Sie eine gültige E-Mail ein';
+                  }
+                  return null;
+                },
               ),
-              maxLines: 5,
-              validator: (value) => value!.isEmpty ? 'Pflichtfeld' : null,
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Nachricht gesendet!')),
-                  );
-                  _nameController.clear();
-                  _emailController.clear();
-                  _messageController.clear();
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 15),
+              const SizedBox(height: 15),
+              TextFormField(
+                controller: _messageController,
+                decoration: const InputDecoration(
+                  labelText: 'Nachricht',
+                  border: OutlineInputBorder(),
+                  alignLabelWithHint: true,
+                ),
+                maxLines: 5,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Bitte geben Sie eine Nachricht ein';
+                  }
+                  if (value.length < 10) {
+                    return 'Die Nachricht sollte mindestens 10 Zeichen enthalten';
+                  }
+                  return null;
+                },
               ),
-              child: const Text('Senden', style: TextStyle(fontSize: 18)),
-            ),
-          ],
+              const SizedBox(height: 20),
+              Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40,
+                      vertical: 15,
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Nachricht von ${_nameController.text} gesendet!',
+                          ),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                      _nameController.clear();
+                      _emailController.clear();
+                      _messageController.clear();
+                    }
+                  },
+                  child: const Text('Nachricht senden'),
+                ),
+              ),
+              const SizedBox(height: 30),
+              const Center(
+                child: Text(
+                  'Alternative Kontaktmöglichkeiten',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(height: 15),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.email, size: 30),
+                  SizedBox(width: 10),
+                  Text('kevin.montag@example.com'),
+                ],
+              ),
+              const SizedBox(height: 10),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.phone, size: 30),
+                  SizedBox(width: 10),
+                  Text('+49 123 456789'),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
