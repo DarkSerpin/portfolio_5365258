@@ -14,47 +14,66 @@ class WorkPage extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
-        const Text('Meine Arbeiten', 
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+        const Text(
+          'Meine Arbeiten',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 20),
         _buildProjectCard(
           context,
           'Slider Demo',
           'Interaktives UI-Element',
-          () => Navigator.push(context, MaterialPageRoute(
-            builder: (context) => SliderPage(userData: userData)
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder:
+                  (context) => SliderPage(userData: userData), // Hinzugefügt: )
+            ),
           ),
         ),
         _buildProjectCard(
           context,
           'Profil Editor',
           'Persönliche Informationen bearbeiten',
-          () => Navigator.push(context, MaterialPageRoute(
-            builder: (context) => ProfileFormPage(userData: userData)
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProfileFormPage(userData: userData),
+            ),
           ),
         ),
         _buildProjectCard(
           context,
           'Einstellungen',
           'App-Einstellungen anpassen',
-          () => Navigator.push(context, MaterialPageRoute(
-            builder: (context) => SettingsPage(userData: userData)
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SettingsPage(userData: userData),
+            ),
           ),
         ),
         _buildProjectCard(
           context,
           'Zusammenfassung',
           'Alle Daten im Überblick',
-          () => Navigator.push(context, MaterialPageRoute(
-            builder: (context) => SummaryPage(userData: userData)
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SummaryPage(userData: userData),
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildProjectCard(BuildContext context, String title, 
-                            String description, VoidCallback onTap) {
+  Widget _buildProjectCard(
+    BuildContext context,
+    String title,
+    String description,
+    VoidCallback onTap,
+  ) {
     return Card(
       margin: const EdgeInsets.only(bottom: 15),
       child: ListTile(
