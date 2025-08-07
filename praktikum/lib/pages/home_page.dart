@@ -14,7 +14,6 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Portfolio von Kevin Montag'),
-        backgroundColor: Colors.blue,
         elevation: 4,
       ),
       body: Center(
@@ -61,15 +60,17 @@ class HomePage extends StatelessWidget {
       width: 250,
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.all(16),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Colors.white,
+        ),
         onPressed:
             () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => pageBuilder()),
             ),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Text(text, style: const TextStyle(fontSize: 18)),
-        ),
+        child: Text(text, style: const TextStyle(fontSize: 18)),
       ),
     );
   }
