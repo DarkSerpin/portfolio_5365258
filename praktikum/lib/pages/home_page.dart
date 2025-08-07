@@ -16,7 +16,6 @@ class HomePage extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
-          // Ersetztes NetworkImage mit Fehlerbehandlung
           SizedBox(
             width: 120,
             height: 120,
